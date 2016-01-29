@@ -55,7 +55,7 @@ public class MessageSender {
 		MessageSender message = getMap().get(topick);
 		if (message != null)
 			return message.getValue(payload);
-		return "";
+		return payload;
 	}
 
 	public static Map<String, MessageSender> getMap() {

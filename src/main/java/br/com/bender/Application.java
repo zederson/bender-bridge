@@ -20,8 +20,8 @@ public class Application {
 	}
 
 	private static void setUpSubscriber() {
-		Subscriber subs = new Subscriber("bender/socket/#", new MessageCallback());
-		subs.start();
+		new Subscriber("bender/socket/#", new MessageCallback()).start();
+		new Subscriber("bender/ir/receptor", new MessageCallback()).start();
 	}
 
 	private static void registerSenders() {
@@ -32,6 +32,7 @@ public class Application {
 		try {
 			Runtime.getRuntime().addShutdownHook(new Thread() {
 				public void run() {
+					System.out.println("Teh Mais !!!!!");
 					Publisher.getInstance().stop();
 					Bridge.stop();
 				}
