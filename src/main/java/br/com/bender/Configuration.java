@@ -2,6 +2,8 @@ package br.com.bender;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 public class Configuration {
@@ -62,6 +64,17 @@ public class Configuration {
 	public String getValue(String key) {
 		return properties.getProperty(key);
 	}
+	
+	public List<String> getValues(String key) {
+		List<String> list = new ArrayList<String>();
+		int i = 0;
+		String newKey = String.format("%s.%d", key, i);
+		while(properties.containsKey(newKey)) {
+			list.add(properties.getProperty(newKey));
+			newKey = String.format("%s.%d", key, ++i);
+		}
+		return list;
+	}
 
 	@Override
 	public String toString() {
@@ -88,14 +101,13 @@ public class Configuration {
 	private static Properties getProperties() {
 		InputStream stream = getFile();
 		Properties prop = new Properties();
-
+		
 		try {
 			if (stream != null)
 				prop.load(stream);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 		return prop;
 	}
 

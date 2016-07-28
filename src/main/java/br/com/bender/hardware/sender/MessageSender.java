@@ -6,15 +6,10 @@ import java.util.Map;
 public class MessageSender {
 
 	private static final Map<String, MessageSender> map = new HashMap<>();
-
 	private String topick;
-	private String on;
-	private String off;
 
-	public MessageSender(String topick, String on, String off) {
+	public MessageSender(String topick) {
 		this.topick = topick;
-		this.on = on;
-		this.off = off;
 	}
 
 	public String getTopick() {
@@ -25,29 +20,12 @@ public class MessageSender {
 		this.topick = topick;
 	}
 
-	public String getOn() {
-		return on;
-	}
-
-	public void setOn(String on) {
-		this.on = on;
-	}
-
-	public String getOff() {
-		return off;
-	}
-
-	public void setOff(String off) {
-		this.off = off;
-	}
-
 	public String getValue(String payload) {
-		boolean inOut = Boolean.parseBoolean(payload);
-		return inOut ? getOn() : getOff();
+		return payload;
 	}
 
-	public static void add(String topick, String on, String off) {
-		MessageSender message = new MessageSender(topick, on, off);
+	public static void add(String topick) {
+		MessageSender message = new MessageSender(topick);
 		getMap().put(topick, message);
 	}
 
